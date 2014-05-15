@@ -1,4 +1,4 @@
-// testing
+//testing
 // Module dependencies
 var application_root = __dirname,
   express = require('express'), // Web framework
@@ -55,16 +55,19 @@ app.get( '/api', function (request, response) {
 mongoose.connect('mongodb://localhost/chatty');
 
 // Schemas
-var user = new mongoose.Schema({
-  name: String
+var BeforeIDie = new mongoose.Schema({
+  todo: String,
+  createDate: Date,
+  modifiedDate: Date
 });
 
-var UserModel = mongoose.model( 'UserModel', user);
+var BeforeIDieModel = mongoose.model( 'BeforeIDie', BeforeIDie);
 
 // Get a list of all before I die "todos"
-app.get( '/api/users', function (request, response) {
-  return UserModel.find( function ( err, user) {
+app.get( '/api/befores', function (request, response) {
+  return BeforeIDieModel.find( function ( err, beforeidie) {
     if ( !err) {
+      io.sockets.in( 'deathRoom' ).emit( data );
       console.log(data);
       return response.send( data );
     } else {
@@ -74,15 +77,17 @@ app.get( '/api/users', function (request, response) {
 });
 
 // Insert a new "before i die" todo
-app.post ( '/api/users', function ( request, response ) {
-  var user = new UserModel({
-    name: request.body.name,
+app.post ( '/api/befores', function ( request, response ) {
+  var beforeidie = new BeforeIDieModel({
+    todo: request.body.todo,
+    createDate: request.body.createDate,
+    modifiedDate: request.body.modifiedDate
   });
 
-  return user.save( function ( err ) {
+  return beforeidie.save( function ( err ) {
     if ( !err ) {
       console.log( 'created' );
-      return response.send( user );
+      return response.send( beforeidie );
     } else {
       console.log( err );
     }
@@ -92,7 +97,7 @@ app.post ( '/api/users', function ( request, response ) {
 
 // SOCKETS
 io.sockets.on('connection', function(socket) {
-  socket.join('ChatRoom');
+  socket.join('deathRoom');
   
   BeforeIDieModel.find({}, function(err, data) {
     socket.emit('news', {collection: data});
@@ -101,8 +106,10 @@ io.sockets.on('connection', function(socket) {
 
   socket.on('add', function (data) {
 
-    var user = new User({
-      name: data.name
+    var goal = new BeforeIDieModel({
+      todo: data.todo,
+      createDate: data.createDate,
+      modifiedDate: data.modifiedDate
     });
 
 
