@@ -51,7 +51,7 @@ app.get( '/api', function (request, response) {
 });
 
 // Connect to the database
-mongoose.connect('mongodb://localhost/workshop_database');
+mongoose.connect('mongodb://localhost/chatty');
 
 // Schemas
 var BeforeIDie = new mongoose.Schema({
