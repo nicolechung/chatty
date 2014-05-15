@@ -6,19 +6,22 @@ socket.on('news', function (data) {
 });
 
 function UserCtrl($scope) {
-  $scope.userAdded = false;
-  
+  //$scope.user.added = false;
+    $scope.user = {
+      added : false;
+    };
   $scope.addUser = function() {
-    var user = $scope.userName;
+    
+    alert($scope.userName);
+    $scope.user.added = true;
+    // socket.emit('add', {
+    //   todo: todo,
+    //   createDate: new Date().getTime(),
+    //   modifiedDate: new Date().getTime()
+    // });
 
-    socket.emit('add', {
-      todo: todo,
-      createDate: new Date().getTime(),
-      modifiedDate: new Date().getTime()
-    });
 
-    $scope.userAdded = true;
-    alert($scope.userAdded);
+    
   }
 
 }

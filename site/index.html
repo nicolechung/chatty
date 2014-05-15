@@ -14,12 +14,12 @@
 
   <label>Add a user</label>
   <div ng-controller="UserCtrl">
-    <form ng-submit="addUser()" ng-hide="userAdded">
+    <form ng-submit="addUser()" ng-hide="user.added == true">
       <input type="text" ng-model="userName" placeholder="name..." />
       <input type="submit" value="add a user">
     </form>
     <hr>
-    <h1 ng-show="userAdded"> Added {{user}} </h1>
+    <h1 ng-show="user.added == false"> Added {{userName}} </h1>
   </div>
 </body>
 </html>
