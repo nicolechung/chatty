@@ -7,13 +7,11 @@ socket.on('news', function (data) {
 
 function UserCtrl($scope) {
   //$scope.user.added = false;
-    $scope.user = {
-      added : false;
-    };
+  $scope.added = false;
+  
   $scope.addUser = function() {
     
-    alert($scope.userName);
-    $scope.user.added = true;
+    $scope.added = true;
     // socket.emit('add', {
     //   todo: todo,
     //   createDate: new Date().getTime(),
