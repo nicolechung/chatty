@@ -12,14 +12,14 @@
 <body>
   <h1>Chatty</h1>
 
-  <label>Before I die...</label>
-  <div ng-controller="BeforeIDieCtrl">
-    <form ng-submit="addBeforeTodo()">
-      <input type="text" ng-model="chatText" placeholder="Message..." />
-      <input type="submit" value="chat">
+  <label>Add a user</label>
+  <div ng-controller="UserCtrl">
+    <form ng-submit="addUser()" ng-hide="userAdded">
+      <input type="text" ng-model="userName" placeholder="name..." />
+      <input type="submit" value="add a user">
     </form>
     <hr>
-    <h1> {{beforeIDieTxt}} </h1>
+    <h1 ng-show="userAdded"> Added {{user}} </h1>
   </div>
 </body>
 </html>
