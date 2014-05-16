@@ -26,6 +26,20 @@ label {
 .ng-scope li {
   color: black;
 }
+.group-list {
+  list-style: none;
+  float: left;
+  width: 200px;
+}
+.messageList {
+  width: 600px;
+  float: left;
+  margin-top: -70px;
+}
+.group-list li {
+  list-style: none;
+  color: #fff;
+}
 .container {
   max-width: 960px;
   margin: 0 auto;
@@ -36,6 +50,7 @@ label {
   padding: 0 20px 0 0;
   list-style: none;
 }
+
 
 .chat-thread li {
   position: relative;
@@ -199,14 +214,4 @@ label {
   100% {
     margin-right: 0;
   }
-}
-.credits{
-  text-align:center;
-  margin-top:35px;
-  color: rgba(255, 255, 255, 0.35);
-  font-family: 'Noto Sans', sans-serif;
-}
-.credits a{
-  text-decoration:none;
-  color: rgba(255, 255, 255, 0.35);
 }

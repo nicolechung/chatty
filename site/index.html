@@ -24,13 +24,13 @@
     </form>
     <hr>
 
-    <h3> Group Members </h3>
-   <ul style=" background:white; width:40px;" ng-repeat=" user in users">
-     <li>{{user.name}}</li>
-   </ul>
+    <h3>Group Members </h3>
+    <ul class="group-list">
+      <li ng-repeat=" user in users">{{user.name}}</li>
+    </ul>
  </div>
 
-<div ng-show="displayName.added == true" ng-controller="MessagesCtrl">
+<div ng-show="displayName.added == true" ng-controller="MessagesCtrl" class="messageList">
 
   <h1 > Hi {{displayName.givenName}} </h1>
    <label>Send Message</label>
@@ -39,10 +39,10 @@
       <input type="submit" value="Send">
     </form>
   <div id="convo" data-from="Sonu Joshi">  
-<ul class="chat-thread">
-  <li ng-repeat="message in messages">{{message.userName}} :  {{message.text}}</li>
-  
-</ul>
+    <ul class="chat-thread">
+      <li ng-repeat="message in messages">{{message.userName}} :  {{message.text}}</li>
+      
+    </ul>
   </div>
 
  
