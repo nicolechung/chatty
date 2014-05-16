@@ -9,7 +9,10 @@ var scotchTodo = angular.module('chatty', []);
 function UserCtrl($scope, $http) {
   
 $scope.users = {};
+
   $scope.userName = {};
+  $scope.message = {};
+  $scope.messages = {};
   $scope.addUser = function() {
     
    $http.post('/api/users',$scope.userName)
@@ -18,18 +21,38 @@ $scope.users = {};
       console.log(data);
     })
     .error(function(data) {
-      alert("dd");
           });
 
      $http.get('/api/users')
     .success(function(data) {
       $scope.users = data;
-      console.log("Asfasf",$scope.users);
+      console.log("users",$scope.users);
     })
     .error(function(data) {
-      alert("dd");
           });
 
   }
+
+  $scope.sendMessage = function() {
+    $scope.message.name = 'Giff';
+    console.log($scope.message);
+     $http.post('/api/message',$scope.message)
+    .success(function(data) {
+
+      console.log(data);
+    })
+    .error(function(data) {
+          });
+
+     $http.get('/api/messages')
+    .success(function(data) {
+      $scope.messages = data;
+      console.log("users",$scope.messages);
+    })
+    .error(function(data) {
+          });
+  };
+  
+  
 
 }

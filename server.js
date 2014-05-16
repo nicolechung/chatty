@@ -59,7 +59,15 @@ var user = new mongoose.Schema({
   name: String
 });
 
+var message = new mongoose.Schema({
+  userName: String,
+  text: String
+});
+
 var UserModel = mongoose.model( 'UserModel', user);
+
+var MessageModel = mongoose.model ( 'MessageModel', message);
+
 
 // Get a list of all before I die "todos"
 app.get( '/api/users', function (request, response) {
@@ -84,6 +92,37 @@ console.log(user);
     if ( !err ) {
       console.log( 'created' );
       return response.send( user );
+    } else {
+      console.log( err );
+    }
+  });
+});
+
+
+// Get a list of all before I die "todos"
+app.get( '/api/messages', function (request, response) {
+  // use mongoose to get all todos in the database
+    MessageModel.find(function(err, messages) {
+
+      // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+      if (err)
+        response.send(err)
+
+      response.json(messages); // return all todos in JSON format
+    });
+});
+
+// Insert a new "before i die" todo
+app.post ( '/api/message', function ( request, response ) {
+  var message = new MessageModel({
+    userName: request.body.name,
+    text: request.body.text
+  });
+console.log(message);
+  return message.save( function ( err ) {
+    if ( !err ) {
+      console.log( 'message created' );
+      return response.send( message );
     } else {
       console.log( err );
     }

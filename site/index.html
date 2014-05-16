@@ -24,24 +24,21 @@
    <div ng-repeat=" user in users">
      {{user.name}}
    </div>
+
+
+   <label>Send Message</label>
+    <form ng-submit="sendMessage()" >
+      <input type="text" ng-model="message.text" placeholder="" />
+      <input type="submit" value="Send">
+    </form>
+  <div id="convo" data-from="Sonu Joshi">  
+<ul class="chat-thread">
+  <li ng-repeat="message in messages">{{message.userName}} :  {{message.text}}</li>
+  
+</ul>
   </div>
 
-
-  <div id="convo" ng-repeat="">  
-<ul class="chat-thread">
-  <li>Are we meeting today?</li>
-  <li>yes, what time suits you?</li>
-  <li>I was thinking after lunch, I have a meeting in the morning</li>
-    <li>Are we meeting today?</li>
-  <li>yes, what time suits you?</li>
-  <li>I was thinking after lunch, I have a meeting in the morning</li>
-    <li>Are we meeting today?</li>
-  <li>yes, what time suits you?</li>
-  <li>I was thinking after lunch, I have a meeting in the morning</li>
-    <li>Are we meeting today?</li>
-  <li>yes, what time suits you?</li>
-  <li>I was thinking after lunch, I have a meeting in the morning</li>
-</ul>
+ 
 </div>
 </body>
 </html>
