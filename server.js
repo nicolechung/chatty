@@ -73,7 +73,7 @@ var UserModel = mongoose.model( 'UserModel', user);
 var MessageModel = mongoose.model ( 'MessageModel', message);
 
 
-// Get a list of all before I die "todos"
+// Get a list of all users
 app.get( '/api/users', function (request, response) {
   // use mongoose to get all todos in the database
     UserModel.find(function(err, users) {
@@ -86,7 +86,7 @@ app.get( '/api/users', function (request, response) {
     });
 });
 
-// Insert a new "before i die" todo
+// Insert a new user todo
 app.post ( '/api/users', function ( request, response ) {
   var user = new UserModel({
     name: request.body.name,
@@ -118,7 +118,7 @@ app.get( '/api/messages', function (request, response) {
 
 
 
-// Insert a new "before i die" todo
+// Insert a new message
 app.post ( '/api/message', function ( request, response ) {
   var message = new MessageModel({
     userName: request.body.name,

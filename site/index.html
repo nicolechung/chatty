@@ -11,10 +11,11 @@
   <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-  <h1>Chatty</h1>
+  
 
   
-  <div ng-controller="UserCtrl">
+  <div ng-controller="UserCtrl" class="container">
+    <h1>Chatty</h1>
     <!-- <button ng-click="clear()">Clear</button> -->
     <label ng-hide="userName.added == true">Add a user</label>
     <form ng-submit="addUser()" ng-hide="added">

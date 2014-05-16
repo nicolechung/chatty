@@ -6,6 +6,8 @@ body {
   background: -webkit-linear-gradient(-45deg, #183850 0, #183850 25%, #192c46 50%, #22254c 75%, #22254c 100%);
   background-repeat: no-repeat;
   background-attachment: fixed;
+  color: #fff;
+  font: 100% 'Noto Sans', sans-serif;
 }
 
 h1 {
@@ -13,6 +15,21 @@ h1 {
   color: white;
 }
 
+input {
+  border-radius: 3px;
+  padding: 10px;
+  font-size: 14px;
+}
+label {
+  margin-bottom: 5px;
+}
+.ng-scope li {
+  color: black;
+}
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+}
 
 .chat-thread {
   margin: 24px auto 0 auto;
