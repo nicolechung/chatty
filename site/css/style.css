@@ -30,6 +30,7 @@ label {
   list-style: none;
   float: left;
   width: 200px;
+  padding: 0;
 }
 .messageList {
   width: 600px;

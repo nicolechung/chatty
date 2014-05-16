@@ -87,7 +87,8 @@ function MessagesCtrl($scope, $http, socket, Username) {
 
 
   socket.on("displayMessages", function(data){
-    $scope.messages = data.messages;
+    /* Reverse the messages so the most recent is on top */
+    $scope.messages = data.messages.reverse();
   });
 
 
