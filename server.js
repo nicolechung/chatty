@@ -63,23 +63,23 @@ var UserModel = mongoose.model( 'UserModel', user);
 
 // Get a list of all before I die "todos"
 app.get( '/api/users', function (request, response) {
-  return UserModel.find( function ( err, user) {
-    if ( !err) {
-      io.sockets.in( 'deathRoom' ).emit( data );
-      console.log(data);
-      return response.send( data );
-    } else {
-      return console.log(err);
-    }
-  });
+  // use mongoose to get all todos in the database
+    UserModel.find(function(err, users) {
+
+      // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+      if (err)
+        response.send(err)
+
+      response.json(users); // return all todos in JSON format
+    });
 });
 
 // Insert a new "before i die" todo
 app.post ( '/api/users', function ( request, response ) {
   var user = new UserModel({
-    name: request.body.name,
+    name: request.body.text,
   });
-
+console.log(user);
   return user.save( function ( err ) {
     if ( !err ) {
       console.log( 'created' );
@@ -95,7 +95,7 @@ app.post ( '/api/users', function ( request, response ) {
 io.sockets.on('connection', function(socket) {
     socket.join('ChatRoom');
   
-  BeforeIDieModel.find({}, function(err, data) {
+  UserModel.find({}, function(err, data) {
     socket.emit('news', {collection: data});
   }); 
 
