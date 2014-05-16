@@ -24,16 +24,18 @@
     </form>
     <hr>
 
-    <h3>Group Members </h3>
-    <ul class="group-list">
+    <label ng-show="userName.added == true">Search Members</label>
+    <form  ng-show="userName.added == true">
       <input type="text" ng-model="searchText" placeholder="search.." />
+    </form>
+    <ul class="group-list">
       <li ng-repeat=" user in users | filter:searchText">{{user.name}}</li>
     </ul>
  </div>
 
 <div ng-show="displayName.added == true" ng-controller="MessagesCtrl" class="messageList">
 
-  <h1 > Hi {{displayName.givenName}} </h1>
+  <h2 > Hi {{displayName.givenName}} </h2>
    <label>Send Message</label>
     <form ng-submit="sendMessage()" >
       <input type="textarea" ng-model="message.text" placeholder="" />
