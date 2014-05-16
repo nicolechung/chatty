@@ -85,9 +85,6 @@ label {
 }
 
 .chat-thread li:nth-child(odd) {
-  animation: show-chat-odd 0.15s 1 ease-in;
-  -moz-animation: show-chat-odd 0.15s 1 ease-in;
-  -webkit-animation: show-chat-odd 0.15s 1 ease-in;
   float: right;
   margin-right: 80px;
   color: #0AD5C1;
@@ -104,9 +101,6 @@ label {
 }
 
 .chat-thread li:nth-child(even) {
-  animation: show-chat-even 0.15s 1 ease-in;
-  -moz-animation: show-chat-even 0.15s 1 ease-in;
-  -webkit-animation: show-chat-even 0.15s 1 ease-in;
   float: left;
   margin-left: 80px;
   color: #0EC879;

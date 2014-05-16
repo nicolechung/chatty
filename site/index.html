@@ -40,7 +40,7 @@
     </form>
   <div id="convo" data-from="Sonu Joshi">  
     <ul class="chat-thread">
-      <li ng-repeat="message in messages">{{message.userName}} :  {{message.text}}</li>
+      <li ng-repeat="message in messages track by message._id">{{message.userName}} :  {{message.text}}</li>
       
     </ul>
   </div>
