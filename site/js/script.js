@@ -9,11 +9,12 @@ var scotchTodo = angular.module('chatty', []);
 function UserCtrl($scope, $http) {
   
 $scope.users = {};
-  $scope.userName = {};
+  $scope.userName = '';
   $scope.addUser = function() {
     
    $http.post('/api/users',$scope.userName)
     .success(function(data) {
+      alert('added user');
       console.log(data);
     })
     .error(function(data) {
