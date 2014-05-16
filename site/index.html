@@ -17,11 +17,13 @@
   <div ng-controller="UserCtrl">
     <label>Add a user</label>
     <form ng-submit="addUser()" ng-hide="added">
-      <input type="text" ng-model="userName" placeholder="name..." />
+      <input type="text" ng-model="userName.name" placeholder="name..." />
       <input type="submit" value="add a user">
     </form>
     <hr>
-    <h1 ng-show="added"> Added {{userName}} </h1>
+   <div ng-repeat=" user in users">
+     {{user.name}}
+   </div>
   </div>
 
 

@@ -77,7 +77,7 @@ app.get( '/api/users', function (request, response) {
 // Insert a new "before i die" todo
 app.post ( '/api/users', function ( request, response ) {
   var user = new UserModel({
-    name: request.body.text,
+    name: request.body.name,
   });
 console.log(user);
   return user.save( function ( err ) {
