@@ -55,17 +55,15 @@ app.get( '/api', function (request, response) {
 mongoose.connect('mongodb://localhost/chatty');
 
 // Schemas
-var BeforeIDie = new mongoose.Schema({
-  todo: String,
-  createDate: Date,
-  modifiedDate: Date
+var user = new mongoose.Schema({
+  name: String
 });
 
-var BeforeIDieModel = mongoose.model( 'BeforeIDie', BeforeIDie);
+var UserModel = mongoose.model( 'UserModel', user);
 
 // Get a list of all before I die "todos"
-app.get( '/api/befores', function (request, response) {
-  return BeforeIDieModel.find( function ( err, beforeidie) {
+app.get( '/api/users', function (request, response) {
+  return UserModel.find( function ( err, user) {
     if ( !err) {
       io.sockets.in( 'deathRoom' ).emit( data );
       console.log(data);
@@ -77,17 +75,15 @@ app.get( '/api/befores', function (request, response) {
 });
 
 // Insert a new "before i die" todo
-app.post ( '/api/befores', function ( request, response ) {
-  var beforeidie = new BeforeIDieModel({
-    todo: request.body.todo,
-    createDate: request.body.createDate,
-    modifiedDate: request.body.modifiedDate
+app.post ( '/api/users', function ( request, response ) {
+  var user = new UserModel({
+    name: request.body.name,
   });
 
-  return beforeidie.save( function ( err ) {
+  return user.save( function ( err ) {
     if ( !err ) {
       console.log( 'created' );
-      return response.send( beforeidie );
+      return response.send( user );
     } else {
       console.log( err );
     }
@@ -97,7 +93,7 @@ app.post ( '/api/befores', function ( request, response ) {
 
 // SOCKETS
 io.sockets.on('connection', function(socket) {
-  socket.join('deathRoom');
+    socket.join('ChatRoom');
   
   BeforeIDieModel.find({}, function(err, data) {
     socket.emit('news', {collection: data});
@@ -106,14 +102,12 @@ io.sockets.on('connection', function(socket) {
 
   socket.on('add', function (data) {
 
-    var goal = new BeforeIDieModel({
-      todo: data.todo,
-      createDate: data.createDate,
-      modifiedDate: data.modifiedDate
+    var user = new User({
+      name: data.name
     });
 
 
-    return goal.save( function ( err ) {
+    return user.save( function ( err ) {
       if ( !err ) {
         console.log( 'created' );
       } else {
