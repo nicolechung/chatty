@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app ="chatty">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +24,9 @@
    <div ng-repeat=" user in users">
      {{user.name}}
    </div>
+ </div>
 
+<div ng-controller="MessagesCtrl">
 
    <label>Send Message</label>
     <form ng-submit="sendMessage()" >

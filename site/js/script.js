@@ -1,23 +1,30 @@
 /* Angular stuff goes here */
 // var socket = io.connect('http://localhost');
-var scotchTodo = angular.module('chatty', []);
+var chatty = angular.module('chatty', []);
 
 // socket.on('news', function (data) {
 //   console.log(data);
 // });
 
-function UserCtrl($scope, $http) {
-  
+chatty.factory('Username', function () {
+   
+   return {
+    givenName : "John"
+  };
+});
+
+
+function UserCtrl($scope, $http, Username) {
 $scope.users = {};
 
-  $scope.userName = {};
+  //$scope.userName = Username;
   $scope.message = {};
   $scope.messages = {};
   $scope.addUser = function() {
-    
-   $http.post('/api/users',$scope.userName)
+    Username.givenName = $scope.userName.name;
+    alert(Username.givenName);
+   $http.post('/api/users',$scope.userName.name)
     .success(function(data) {
-      alert('added user');
       console.log(data);
     })
     .error(function(data) {
@@ -32,9 +39,10 @@ $scope.users = {};
           });
 
   }
-
+};
+function MessagesCtrl($scope, $http,Username) {
   $scope.sendMessage = function() {
-    $scope.message.name = 'Giff';
+    $scope.message.name = Username.givenName;
     console.log($scope.message);
      $http.post('/api/message',$scope.message)
     .success(function(data) {
@@ -55,4 +63,4 @@ $scope.users = {};
   
   
 
-}
+};
