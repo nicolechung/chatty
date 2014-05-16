@@ -43,11 +43,11 @@ function UserCtrl($scope, $http, socket, Username) {
   $scope.message = {};
   $scope.messages = {};
 
- socket.on("refreshUsers", function(data){
+ socket.on("displayUsers", function(data){
+  console.log(data);
     $scope.users = data.users;
   });
 
- socket.emit('getUsers', {});
 
  $scope.clear = function(){
   $http.get('/api/deleteAll')
@@ -65,8 +65,7 @@ function UserCtrl($scope, $http, socket, Username) {
     Username.added = $scope.userName.added;
    $http.post('/api/users',$scope.userName)
     .success(function(data) {
-      console.log(data);
-    socket.emit('getUsers', {});
+    socket.emit('updateUsers', {});
     })
     .error(function(data) {
           });
@@ -87,7 +86,7 @@ function MessagesCtrl($scope, $http, socket, Username) {
   $scope.displayName = Username;
 
 
-  socket.on("refreshMessages", function(data){
+  socket.on("displayMessages", function(data){
     $scope.messages = data.messages;
   });
 
@@ -97,7 +96,7 @@ function MessagesCtrl($scope, $http, socket, Username) {
      $http.post('/api/message',$scope.message)
     .success(function(data) {
 
-      socket.emit('getMessages', {});
+      socket.emit('updateMessages', {});
       $scope.message.text = "";
     })
     .error(function(data) {

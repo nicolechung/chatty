@@ -64,6 +64,10 @@ var message = new mongoose.Schema({
   text: String
 });
 
+var users = {};
+
+var messages ={};
+
 var UserModel = mongoose.model( 'UserModel', user);
 
 var MessageModel = mongoose.model ( 'MessageModel', message);
@@ -140,22 +144,22 @@ app.get( '/api/deleteAll', function (request, response) {
 
 // SOCKETS
 io.sockets.on('connection', function(socket) {
-    socket.join('ChatRoom');
   console.log("connected");
+
  
-socket.on('getUsers', function(data)
+socket.on('updateUsers', function(data)
 {
     UserModel.find({}, function(err, data) {
-     socket.emit('refreshUsers', {users: data});
+     io.sockets.emit('displayUsers', {users: data});
    }); 
 });
 
 
-socket.on('getMessages', function(data)
+socket.on('updateMessages', function(data)
 {
     MessageModel.find({}, function(err, data) {
-      console.log(data);
-     socket.emit('refreshMessages', {messages: data});
+
+     io.sockets.emit('displayMessages', {messages: data});
    }); 
 });
   socket.on('add', function (data) {

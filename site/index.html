@@ -22,6 +22,8 @@
       <input ng-hide="userName.added == true" type="submit" value="add a user">
     </form>
     <hr>
+
+    <h3> Group Members </h3>
    <ul style=" background:white; width:40px;" ng-repeat=" user in users">
      <li>{{user.name}}</li>
    </ul>
@@ -29,10 +31,10 @@
 
 <div ng-show="displayName.added == true" ng-controller="MessagesCtrl">
 
-  <div > Hi {{displayName.givenName}} </div>
+  <h1 > Hi {{displayName.givenName}} </h1>
    <label>Send Message</label>
     <form ng-submit="sendMessage()" >
-      <input type="text" ng-model="message.text" placeholder="" />
+      <input type="textarea" ng-model="message.text" placeholder="" />
       <input type="submit" value="Send">
     </form>
   <div id="convo" data-from="Sonu Joshi">  
