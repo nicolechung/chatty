@@ -6,8 +6,6 @@ var application_root = __dirname,
   mongoose = require('mongoose'); // MongoDB integration
  
 
-// Config (for later)
-// var config = require( './config/config')();
 
 // Create server
 var app = express();
@@ -43,10 +41,6 @@ server.listen( port, function() {
 
 // Routes
 
-/*
-  Note: do NOT use a get for the index.html page, just the api stuff
-*/
-
 app.get( '/api', function (request, response) {
   response.send( 'Our API is running' );
 });
@@ -64,9 +58,6 @@ var message = new mongoose.Schema({
   text: String
 });
 
-var users = {};
-
-var messages ={};
 
 var UserModel = mongoose.model( 'UserModel', user);
 
@@ -86,8 +77,8 @@ app.get( '/api/users', function (request, response) {
     });
 });
 
-// Insert a new user todo
-app.post ( '/api/users', function ( request, response ) {
+// Insert a new user 
+app.post ( '/api/user', function ( request, response ) {
   var user = new UserModel({
     name: request.body.name,
   });
@@ -103,7 +94,7 @@ console.log(user);
 });
 
 
-// Get a list of all before I die "todos"
+// Get a list of all messages
 app.get( '/api/messages', function (request, response) {
   // use mongoose to get all todos in the database
     MessageModel.find(function(err, messages) {
@@ -135,7 +126,7 @@ console.log(message);
   });
 });
 
-
+//clear database collections
 app.get( '/api/deleteAll', function (request, response) {
    MessageModel.remove().exec();
 
@@ -146,7 +137,7 @@ app.get( '/api/deleteAll', function (request, response) {
 io.sockets.on('connection', function(socket) {
   console.log("connected");
 
- 
+// triggered when user is added
 socket.on('updateUsers', function(data)
 {
     UserModel.find({}, function(err, data) {
@@ -154,7 +145,7 @@ socket.on('updateUsers', function(data)
    }); 
 });
 
-
+//triggered when messages is added
 socket.on('updateMessages', function(data)
 {
     MessageModel.find({}, function(err, data) {
@@ -162,20 +153,6 @@ socket.on('updateMessages', function(data)
      io.sockets.emit('displayMessages', {messages: data});
    }); 
 });
-  socket.on('add', function (data) {
-
-    var user = new User({
-      name: data.name
-    });
-
-
-    return user.save( function ( err ) {
-      if ( !err ) {
-        console.log( 'created' );
-      } else {
-        console.log( err );
-      }
-    });
-  })
+ 
 });
 

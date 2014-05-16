@@ -2,10 +2,6 @@
 var socket = io.connect('http://localhost');
 var chatty = angular.module('chatty', []);
 
-socket.on('chat', function (data) {
-  console.log(data);
-});
-
 chatty.factory('Username', function () {
    return {
     givenName : "",
@@ -44,7 +40,6 @@ function UserCtrl($scope, $http, socket, Username) {
   $scope.messages = {};
 
  socket.on("displayUsers", function(data){
-  console.log(data);
     $scope.users = data.users;
   });
 
@@ -53,7 +48,6 @@ function UserCtrl($scope, $http, socket, Username) {
   $http.get('/api/deleteAll')
     .success(function(data) {
       $scope.users = data;
-      console.log("users",$scope.users);
     })
     .error(function(data) {
           });
@@ -63,7 +57,7 @@ function UserCtrl($scope, $http, socket, Username) {
     $scope.userName.added = true;
     Username.givenName = $scope.userName.name;
     Username.added = $scope.userName.added;
-   $http.post('/api/users',$scope.userName)
+   $http.post('/api/user',$scope.userName)
     .success(function(data) {
     socket.emit('updateUsers', {});
     })
