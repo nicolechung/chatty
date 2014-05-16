@@ -15,19 +15,21 @@
 
   
   <div ng-controller="UserCtrl">
-    <label>Add a user</label>
+    <!-- <button ng-click="clear()">Clear</button> -->
+    <label ng-hide="userName.added == true">Add a user</label>
     <form ng-submit="addUser()" ng-hide="added">
-      <input type="text" ng-model="userName.name" placeholder="name..." />
-      <input type="submit" value="add a user">
+      <input ng-hide="userName.added == true" type="text" ng-model="userName.name" placeholder="name..." />
+      <input ng-hide="userName.added == true" type="submit" value="add a user">
     </form>
     <hr>
-   <div ng-repeat=" user in users">
-     {{user.name}}
-   </div>
+   <ul style=" background:white; width:40px;" ng-repeat=" user in users">
+     <li>{{user.name}}</li>
+   </ul>
  </div>
 
-<div ng-controller="MessagesCtrl">
+<div ng-show="displayName.added == true" ng-controller="MessagesCtrl">
 
+  <div > Hi {{displayName.givenName}} </div>
    <label>Send Message</label>
     <form ng-submit="sendMessage()" >
       <input type="text" ng-model="message.text" placeholder="" />

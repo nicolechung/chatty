@@ -112,6 +112,8 @@ app.get( '/api/messages', function (request, response) {
     });
 });
 
+
+
 // Insert a new "before i die" todo
 app.post ( '/api/message', function ( request, response ) {
   var message = new MessageModel({
@@ -130,15 +132,32 @@ console.log(message);
 });
 
 
+app.get( '/api/deleteAll', function (request, response) {
+   MessageModel.remove().exec();
+
+    UserModel.remove().exec();
+});
+
 // SOCKETS
 io.sockets.on('connection', function(socket) {
     socket.join('ChatRoom');
-  
-  UserModel.find({}, function(err, data) {
-    socket.emit('news', {collection: data});
-  }); 
+  console.log("connected");
+ 
+socket.on('getUsers', function(data)
+{
+    UserModel.find({}, function(err, data) {
+     socket.emit('refreshUsers', {users: data});
+   }); 
+});
 
 
+socket.on('getMessages', function(data)
+{
+    MessageModel.find({}, function(err, data) {
+      console.log(data);
+     socket.emit('refreshMessages', {messages: data});
+   }); 
+});
   socket.on('add', function (data) {
 
     var user = new User({
